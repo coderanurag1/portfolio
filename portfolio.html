@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anurag Gupta — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12161F;
+    --panel:#1A2030;
+    --panel-line:#2A3245;
+    --ink:#D9E1EC;
+    --ink-dim:#8894A8;
+    --gold:#F0B429;
+    --cyan:#4FD1C5;
+    --mono:'JetBrains Mono', monospace;
+    --sans:'Inter', sans-serif;
+    --radius:6px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    background-image:
+      linear-gradient(var(--panel-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--panel-line) 1px, transparent 1px);
+    background-size:48px 48px;
+    background-attachment:fixed;
+    background-position:center;
+  }
+
+  a{color:var(--gold); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  :focus-visible{
+    outline:2px solid var(--cyan);
+    outline-offset:3px;
+  }
+
+  .wrap{max-width:840px; margin:0 auto; padding:0 24px;}
+
+  /* HEADER */
+  header{
+    position:sticky; top:0; z-index:10;
+    background:rgba(18,22,31,0.9);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--panel-line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+  }
+  .logo{
+    font-family:var(--mono); font-weight:700; font-size:1.1rem;
+    color:var(--ink);
+  }
+  .logo span{color:var(--gold);}
+  nav ul{display:flex; gap:24px; list-style:none;}
+  nav ul li a{
+    font-family:var(--mono); font-size:0.85rem; color:var(--ink-dim);
+  }
+  nav ul li a:hover{color:var(--gold); text-decoration:none;}
+
+  /* HERO / TERMINAL */
+  .hero{padding:80px 24px 60px;}
+  .terminal{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:10px 14px;
+    background:#151A26;
+    border-bottom:1px solid var(--panel-line);
+  }
+  .dot{width:10px; height:10px; border-radius:50%;}
+  .dot.r{background:#E5534B;}
+  .dot.y{background:#E3B341;}
+  .dot.g{background:#3FB950;}
+  .terminal-title{
+    margin-left:8px; font-family:var(--mono); font-size:0.75rem; color:var(--ink-dim);
+  }
+  .terminal-body{
+    padding:28px 24px 36px;
+    font-family:var(--mono);
+  }
+  .prompt{color:var(--cyan);}
+  .cmd-line{color:var(--ink-dim); font-size:0.95rem; margin-bottom:18px;}
+  .output-name{
+    font-size:clamp(2rem, 6vw, 3rem);
+    font-weight:800;
+    color:var(--ink);
+    letter-spacing:-0.02em;
+    margin-bottom:6px;
+  }
+  .output-role{
+    color:var(--gold);
+    font-size:1.05rem;
+    margin-bottom:18px;
+  }
+  .output-tagline{
+    font-family:var(--sans);
+    color:var(--ink-dim);
+    max-width:52ch;
+    font-size:0.98rem;
+  }
+  .cursor{
+    display:inline-block; width:9px; height:1.1em; background:var(--gold);
+    vertical-align:text-bottom; margin-left:2px;
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  @media (prefers-reduced-motion: reduce){
+    .cursor{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* SECTION SHELL */
+  section{padding:56px 24px;}
+  .section-head{
+    display:flex; align-items:baseline; gap:10px;
+    font-family:var(--mono);
+    color:var(--ink-dim);
+    font-size:0.85rem;
+    margin-bottom:22px;
+    border-bottom:1px solid var(--panel-line);
+    padding-bottom:14px;
+  }
+  .section-head .prompt{color:var(--cyan);}
+  .section-head .cmdtext{color:var(--gold);}
+  h2.visually{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);}
+
+  /* ABOUT */
+  .about-card{
+    display:flex; gap:26px; align-items:flex-start; flex-wrap:wrap;
+  }
+  .avatar{
+    width:96px; height:96px; border-radius:var(--radius);
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    flex-shrink:0;
+    overflow:hidden;
+  }
+  .avatar img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .about-text{max-width:56ch; color:var(--ink); font-size:1rem;}
+  .about-text p + p{margin-top:12px;}
+  .about-meta{
+    margin-top:16px; display:flex; gap:14px; flex-wrap:wrap;
+    font-family:var(--mono); font-size:0.8rem; color:var(--ink-dim);
+  }
+
+  /* EDUCATION - log style */
+  .log-entry{
+    display:grid; grid-template-columns:120px 1fr; gap:18px;
+    padding:16px 0; border-bottom:1px dashed var(--panel-line);
+  }
+  .log-entry:last-child{border-bottom:none;}
+  .log-hash{
+    font-family:var(--mono); color:var(--cyan); font-size:0.85rem;
+  }
+  .log-title{font-weight:600; color:var(--ink); margin-bottom:4px;}
+  .log-sub{color:var(--ink-dim); font-size:0.92rem;}
+  .badge{
+    display:inline-block; margin-top:8px;
+    font-family:var(--mono); font-size:0.7rem;
+    color:var(--bg); background:var(--gold);
+    padding:2px 8px; border-radius:3px; font-weight:700;
+  }
+
+  /* SKILLS - file listing */
+  .filelist{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
+    gap:12px;
+  }
+  .filerow{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:var(--radius);
+    padding:14px 16px;
+    font-family:var(--mono);
+    font-size:0.85rem;
+    transition:border-color 0.15s ease, transform 0.15s ease;
+  }
+  .filerow:hover{border-color:var(--gold); transform:translateY(-2px);}
+  .filerow .fname{color:var(--ink); font-weight:700;}
+  .filerow .fext{color:var(--gold);}
+  .filerow .fdesc{color:var(--ink-dim); font-size:0.75rem; margin-top:6px; font-family:var(--sans);}
+
+  /* CONTACT - json style */
+  .json-block{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:var(--radius);
+    padding:24px 26px;
+    font-family:var(--mono);
+    font-size:0.9rem;
+    overflow-x:auto;
+  }
+  .json-block .k{color:var(--cyan);}
+  .json-block .s{color:var(--gold);}
+  .json-block .punc{color:var(--ink-dim);}
+  .contact-links{margin-top:20px; display:flex; gap:16px; flex-wrap:wrap;}
+  .contact-links a{
+    font-family:var(--mono); font-size:0.85rem;
+    border:1px solid var(--panel-line);
+    padding:8px 14px; border-radius:var(--radius);
+    color:var(--ink);
+  }
+  .contact-links a:hover{border-color:var(--gold); color:var(--gold); text-decoration:none;}
+
+  /* FOOTER */
+  footer{
+    padding:32px 24px 48px;
+    text-align:center;
+    font-family:var(--mono);
+    font-size:0.75rem;
+    color:var(--ink-dim);
+  }
+  footer .ver{color:var(--gold);}
+
+  @media (max-width:600px){
+    .nav{flex-direction:column; align-items:flex-start; gap:10px;}
+    nav ul{gap:16px;}
+    .log-entry{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Anurag<span>.</span>Gupta</div>
+    <nav aria-label="Section navigation">
+      <ul>
+        <li><a href="#about">about</a></li>
+        <li><a href="#education">education</a></li>
+        <li><a href="#skills">skills</a></li>
+        <li><a href="#contact">contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Introduction">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="terminal-title">anurag@portfolio — zsh</span>
+      </div>
+      <div class="terminal-body">
+        <div class="cmd-line"><span class="prompt">$</span> whoami</div>
+        <div class="output-name">Anurag Gupta</div>
+        <div class="output-role">Web Developer · BCA Student</div>
+        <p class="output-tagline">Building with React, Node.js and MySQL — currently learning one layout, one API, one query at a time.<span class="cursor" aria-hidden="true"></span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" aria-labelledby="about-head">
+    <div class="section-head" id="about-head">
+      <span class="prompt">$</span> <span class="cmdtext">cat</span> about.md
+    </div>
+    <div class="about-card">
+      <div class="avatar"><img src="anurag-photo.jpg" alt="Anurag Gupta"></div>
+      <div class="about-text">
+        <p>I'm a BCA student from Kanpur, Uttar Pradesh, currently pursuing my degree at Allenhouse Business School with a focus on software development and web technologies.</p>
+        <p>I enjoy turning ideas into working applications — from the layout on the screen to the database behind it. Right now I'm sharpening my skills with the MERN stack and picking up backend fundamentals with Express and MySQL.</p>
+        <div class="about-meta">
+          <span>📍 Kanpur, Uttar Pradesh</span>
+          <span>🎓 BCA, Allenhouse Business School</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" aria-labelledby="edu-head">
+    <div class="section-head" id="edu-head">
+      <span class="prompt">$</span> <span class="cmdtext">git log</span> --education
+    </div>
+
+    <div class="log-entry">
+      <div class="log-hash">#current</div>
+      <div>
+        <div class="log-title">Bachelor of Computer Applications (BCA)</div>
+        <div class="log-sub">Allenhouse Business School, Kanpur — Software Development & Web Technologies</div>
+        <span class="badge">IN PROGRESS</span>
+      </div>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-hash">#senior</div>
+      <div>
+        <div class="log-title">Senior Secondary (12th)</div>
+        <div class="log-sub">Science / Computer stream</div>
+      </div>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-hash">#secondary</div>
+      <div>
+        <div class="log-title">Secondary School (10th)</div>
+        <div class="log-sub">Foundation years — Kanpur</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" aria-labelledby="skills-head">
+    <div class="section-head" id="skills-head">
+      <span class="prompt">$</span> <span class="cmdtext">ls</span> skills/
+    </div>
+    <div class="filelist">
+      <div class="filerow"><span class="fname">react</span><span class="fext">.jsx</span><div class="fdesc">Component-based UI development</div></div>
+      <div class="filerow"><span class="fname">node</span><span class="fext">.js</span><div class="fdesc">Server-side JavaScript runtime</div></div>
+      <div class="filerow"><span class="fname">express</span><span class="fext">.js</span><div class="fdesc">REST APIs & backend routing</div></div>
+      <div class="filerow"><span class="fname">mysql</span><span class="fext">.db</span><div class="fdesc">Relational database design</div></div>
+      <div class="filerow"><span class="fname">mongodb</span><span class="fext">.db</span><div class="fdesc">Document-based data storage</div></div>
+      <div class="filerow"><span class="fname">html</span><span class="fext">5</span><div class="fdesc">Semantic page structure</div></div>
+      <div class="filerow"><span class="fname">css</span><span class="fext">3</span><div class="fdesc">Layout, responsiveness & styling</div></div>
+      <div class="filerow"><span class="fname">javascript</span><span class="fext">.es6</span><div class="fdesc">Core scripting & logic</div></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" aria-labelledby="contact-head">
+    <div class="section-head" id="contact-head">
+      <span class="prompt">$</span> <span class="cmdtext">cat</span> contact.json
+    </div>
+    <div class="json-block">
+      <span class="punc">{</span><br>
+      &nbsp;&nbsp;<span class="k">"name"</span><span class="punc">:</span> <span class="s">"Anurag Gupta"</span><span class="punc">,</span><br>
+      &nbsp;&nbsp;<span class="k">"email"</span><span class="punc">:</span> <span class="s">"osmanurag2022@gmail.com"</span><span class="punc">,</span><br>
+      &nbsp;&nbsp;<span class="k">"phone"</span><span class="punc">:</span> <span class="s">"+91-9005956371"</span><span class="punc">,</span><br>
+      &nbsp;&nbsp;<span class="k">"location"</span><span class="punc">:</span> <span class="s">"Kanpur, Uttar Pradesh, India"</span><span class="punc">,</span><br>
+      &nbsp;&nbsp;<span class="k">"github"</span><span class="punc">:</span> <span class="s">"Coderanurag1"</span><span class="punc">,</span><br>
+      &nbsp;&nbsp;<span class="k">"status"</span><span class="punc">:</span> <span class="s">"open to internships"</span><br>
+      <span class="punc">}</span>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:osmanurag2022@gmail.com">✉ Email</a>
+      <a href="https://www.linkedin.com/in/anurag-gupta-145715321" target="_blank" rel="noopener">💼 LinkedIn</a>
+      <a href="https://github.com/Coderanurag1" target="_blank" rel="noopener">🐙 GitHub</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">portfolio<span class="ver">@v1.0.0</span> — built while learning to ship code, Kanpur © 2026</div>
+</footer>
+
+</body>
+</html>
